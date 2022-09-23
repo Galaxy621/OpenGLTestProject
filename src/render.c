@@ -9,6 +9,7 @@ uint32_t FrameCount = 0;
 void Initialise(int argc, char* argv[]) {
     GLenum glewInitResult;
 
+    InitialiseShaders();
     InitWindow(argc, argv);
 
     glewInitResult = glewInit();
@@ -20,6 +21,8 @@ void Initialise(int argc, char* argv[]) {
     printf("INFO: OpenGL Version: %s\n", glGetString(GL_VERSION));
 
     glClearColor(0.0f, 0.5f, 0.5f, 0.0f);
+    CreateShaders();
+    CreateVBO();
 }
 
 void InitWindow(int argc, char* argv[]) {
@@ -48,6 +51,7 @@ void InitWindow(int argc, char* argv[]) {
     glutDisplayFunc(RenderFunction);
     glutIdleFunc(IdleFunction);
     glutTimerFunc(0, TimerFunction, 0);
+    glutCloseFunc(Cleanup);
 }
 
 void ResizeFunction(int width, int height) {
@@ -59,6 +63,9 @@ void ResizeFunction(int width, int height) {
 void RenderFunction(void) {
     FrameCount++;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
     glutSwapBuffers();
     glutPostRedisplay();
 }

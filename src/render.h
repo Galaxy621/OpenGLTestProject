@@ -8,6 +8,8 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+#include "shader.h"
+
 #define WINDOW_TITLE_PREFIX "Hello, Chat"
 
 void Initialise(int argc, char* argv[]);
